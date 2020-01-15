@@ -1,9 +1,11 @@
 # MultiSE
-Design k-space trajectory and excitation pulses for the MRM paper: A multi spin echo pulse sequence with optimized excitation pulses and a 3D cone readout for hyperpolarized 13C imaging
+Code to design the k-space trajectory and the excitation pulses for the MRM paper: A multi spin echo pulse sequence with optimized excitation pulses and a 3D cone readout for hyperpolarized 13C imaging
 
 Cone trajectory desing:
 
-cone_trajectory_example.m shows the design example used in the paper with 3.2cm FOV and 2mm resolution and writes the resulted wavefroms into files using the VnmrJ format. For generating the trajectory itself coneTrajDesign.m function is called which uses the functions from [1]. 
+cone_trajectory_example.m shows the design example used in the paper with 3.2cm FOV and 2mm resolution and writes the resulted wavefroms into files using the VnmrJ format. For generating the trajectory itself coneTrajDesign.m function is called which uses the functions from the paper: 
+
+Gurney PT, Hargreaves BA, Nishimura DG. Design and analysis of a practical 3D cones trajectory. Magnetic Resonance in Medicine 2006;55(3):575-582.
 
 ******************************************************************************************************************************************
 These functions are not provided, please download them from http://mrsrl.stanford.edu/~ptgurney/cones.php and add to path. Please keep in mind that the wcc.c mex file is set to the gyromagnetic ratio of proton!!! If used for other nuclei replace all the occurences of the number 4258 accordingly then compile the file.
@@ -11,7 +13,7 @@ These functions are not provided, please download them from http://mrsrl.stanfor
 
 Once the cone segments are designed they have to be rewinded, i.e returned to the center of the k-space. For this there are two options available. First, gradRewinder3D.m which tries to find a least time solution "analytically". The resulted rewinder is very close to time optimal and fast to compute although in some cases (i.e. for some FOV and resolution values) might give unnecessarily long waveform. Check on the plots all the time!
 The second option is based on convex optimizaton and the cvx solver which is easy to set up and free to download from: http://cvxr.com/cvx/download/
-Once added to path the last (10th !!!) argument or the last defaul value in the coneTrajDesign.m function should be changed to 'true'. This believed to give time-optimal result although takes slightly more time to design.
+Once added to path the last (10th !!!) argument or the last defaul value in the coneTrajDesign.m function should be changed to 'true'. This believed to give time-optimal result although takes slightly more time to compute.
 
 
 RF pulse design:
