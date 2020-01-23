@@ -54,7 +54,7 @@ if (nargin<9)
     GMAX = 4;
 end
 if (nargin<10)
-    cvx_exists = true;
+    cvx_exists = false;
 end
 
 if strcmp(nucl,'1H')
