@@ -13,8 +13,8 @@ clear all
 close all
 
 nucl          = '13C';           % nucleus of interest
-FOV           = 3.2;             % field of view [cm]
-RES           = 2;               % resolution [mm]
+FOV           = 3.2;             % field of view [cm], clinical example: 16
+RES           = 2;               % resolution [mm],    clinical example: 5
 imageDim      = 10*FOV/RES;      % image dimension = FOV/RES
 Nint          = 1;               % number of interleaves
 
