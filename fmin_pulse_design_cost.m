@@ -76,6 +76,7 @@ B1 = 0.5:0.2:2;
     else
         result = sum(sum(repmat(weights,[length(B1),1]).*(abs(mx+1i*my) - repmat(goal,[length(B1),1])).^2 + ...
                  repmat(2*weights_pyr,[length(B1),1]).*(angle(mx+1i*my) - angle(repmat(goal,[length(B1),1]))).^2))+...
+                 1e6*(max(max(abs(pulse)))>maxB1)
     end        
 end
 
