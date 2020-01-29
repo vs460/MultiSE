@@ -34,7 +34,9 @@ function [k,g] = cvx_rewinder(k0,kend,g0,gend,GMAX,SMAX,gamma,TS,N_upb,eps)
 %
 % **************************************************************************
 % !!!gradient axes are treated separately with respect to hardware limits!!!
-% Specifically coded for the paper:
+% The paper:
+%
+%
 %
 % Take care if used for general purpose, not tested extensively! 
 % No responsibilty taken!
