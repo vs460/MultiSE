@@ -13,7 +13,7 @@ These functions are not provided, please download them from http://mrsrl.stanfor
 
 Once the cone segments are designed they have to be rewinded, i.e returned to the center of the k-space. For this there are two options available. First, gradRewinder3D.m which tries to find a least time solution "analytically". The resulted rewinder is very close to time optimal and fast to compute although in some cases (i.e. for some FOV and resolution values) might give unnecessarily long waveform. The waveforms presented in the paper used this function and worked fine for the FOV-resolution pairs but check on the plots all the time!
 The second option is based on convex optimizaton and the cvx solver which is easy to set up and free to download from: http://cvxr.com/cvx/download/
-Once added to path the last (10th !!!) argument or the last defaul value in the coneTrajDesign.m function should be changed to 'true'. This believed to give time-optimal result although takes slightly more time to compute.
+Once added to path the last (10th !!!) argument or the last defaul value in the coneTrajDesign.m function should be changed to 'true'. This believed to give time-optimal result although takes more time to compute.
 
 
 RF pulse design:
