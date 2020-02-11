@@ -1,5 +1,6 @@
 # MultiSE
-Code to design 3D k-space trajectories and optimized excitation pulses. The following MRM paper used this to design the presented waveforms: A multi spin echo pulse sequence with optimized excitation pulses and a 3D cone readout for hyperpolarized 13C imaging. 
+Code to design 3D k-space trajectories and optimized excitation pulses. The following MRM paper used this to design the presented waveforms: 
+"A multi spin echo pulse sequence with optimized excitation pulses and a 3D cone readout for hyperpolarized 13C imaging". 
 
 Cone trajectory desing:
 
