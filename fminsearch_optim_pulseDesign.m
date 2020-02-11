@@ -40,20 +40,21 @@ ideal_profile = zeros(1,Nf);
 ideal_profile(501:end) = sin(45/180*pi);    % design goal specification
 options = optimset('MaxFunEvals',1e8,'MaxIter',1e8,'TolFun',1e-6,'TolX',1e-6);
 pulse = fminsearch(@(pulse) fmin_pulse_design_cost(pulse,ideal_profile,Nf,time,N,T1,T2),rf_init,options);
-pulse = pulse(1,:) + 1i*pulse(2,:);         % concatenating the real and imag part to a complex waveform
+pulse_tmp = pulse(1,:) + 1i*pulse(2,:);         % concatenating the real and imag part to a complex waveform
 
 
-%% simulate result
-df = [linspace(-2000,2000,800)];            % frequency range where the result is evaluated
-[mx,my,mz] = bloch1(pulse,0,time/N,15,4,df,0,0);
-% transverse component
-figure
-plot(df,abs(mx+1i*my));
-title('Bloch simulated m_{xy} profile')
-% longitudinal component
-figure
-plot(df,mz)
-title('Bloch simulated m_z profile')
+% evaluate the result at a range of B1 amplitudes
+% for the pre-clinical volume coil used 0.5 - 2 range is reasonable
+df = linspace(-1200,1200,2400);
+B1 = 0.5:0.2:2;
+pulse = B1'*pulse_tmp;
+mx = zeros(length(B1),length(df));my = zeros(length(B1),length(df));mz = zeros(length(B1),length(df));
+parfor i = 1:length(B1)
+   [mx(i,:),my(i,:),mz(i,:)] = bloch1(pulse(i,:),0,time/Np,T1,T2,df,0,[0 0]);
+   while sum(isnan(mx(i,:))+isnan(my(i,:))+isnan(mz(i,:)))>0
+        [mx(i,:),my(i,:),mz(i,:)] = bloch1(pulse(i,:),0,time/Np,T1,T2,df,0,[0 0]);
+   end
+end
 
 
 
