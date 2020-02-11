@@ -12,12 +12,13 @@ close all
 
 %% set parameters
 N     = 401;                                % number of initial filter points
-om_s  = 0.1*pi;                             % stop-band endge normalized to Nyquist-freq = [-pi;pi]
-om_p  = 0.065*pi;                           % pass-band endge normalized to Nyquist-freq = [-pi;pi]
-F     = 1/pi*[0 om_p om_s pi];              % array of frequencies for the fir design funtion
+time  = 11.256e-3                           % total duration of the pulse [s]
+f     = 1/time/*(N+1);                      % physical smapling bandwidth
+om_s  = 100;                                % stop-band endge [Hz]
+om_p  = 200;                                % pass-band endge [Hz]
+F     = [0 om_p om_s pi]/f;                 % array of relative frequencies for the fir design funtion
 Amp   = [1/sqrt(2) 1/sqrt(2) 0 0];          % array of amplitudes of each freqeuncy region
 W     = [1 1];                              % weight of each frequency region
-f     = 2e3;                                % physical smapling bandwidth
 BW    = (om_p + om_s)/2/pi*f;               % normalized pass-band width
 gamma = 10.71e6;                            % 13C gyromagnetic ratio [H/T]
 TS    = 1/f;                                % sampling time of the pulse [s]
@@ -30,7 +31,6 @@ alpha = gen_alpha(beta);                    % generating matching minimum-phase 
 rf = iSLR(alpha,beta,gamma,TS);             % inverse-SLR transform
 rf_init = -imag(rf);                        
 N = N + 1;
-time = N*TS;                                % total duration of the pulse                                                      
 tau = time/N;                               % rounding it to the nearest multiple of 4e-6s
 time = length(rf_init)*ceil(tau/4e-6)*4e-6; % 
 rf_init = [rf_init;...                      % reshaping the complex pulse to an array of the real and imag part for the optimization
