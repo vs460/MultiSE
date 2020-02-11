@@ -14,8 +14,8 @@ close all
 N     = 402;                                % number of initial filter points
 time  = 11.256e-3                           % total duration of the pulse [s]
 f     = 1/time*N;                           % physical smapling bandwidth
-om_s  = 400;                                % stop-band endge [Hz]
-om_p  = 200;                                % pass-band endge [Hz]
+om_s  = 300;                                % stop-band endge [Hz]
+om_p  = 100;                                % pass-band endge [Hz]
 F     = [0 om_p om_s f]/f;                  % array of relative frequencies for the fir design funtion
 Amp   = [1/sqrt(2) 1/sqrt(2) 0 0];          % array of amplitudes of each freqeuncy region
 W     = [1 1];                              % weight of each frequency region
