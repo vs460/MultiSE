@@ -11,9 +11,9 @@ clear all
 close all
 
 %% set parameters
-N     = 401;                                % number of initial filter points
+N     = 402;                                % number of initial filter points
 time  = 11.256e-3                           % total duration of the pulse [s]
-f     = 1/time/*(N+1);                      % physical smapling bandwidth
+f     = 1/time/*N;                      % physical smapling bandwidth
 om_s  = 400;                                % stop-band endge [Hz]
 om_p  = 200;                                % pass-band endge [Hz]
 F     = [0 om_p om_s f]/f;                  % array of relative frequencies for the fir design funtion
@@ -30,7 +30,6 @@ beta = firls(N,F,Amp,W);                    % generating linear phase filter
 alpha = gen_alpha(beta);                    % generating matching minimum-phase alpha 
 rf = iSLR(alpha,beta,gamma,TS);             % inverse-SLR transform
 rf_init = -imag(rf);                        
-N = N + 1;
 tau = time/N;                               % rounding it to the nearest multiple of 4e-6s
 time = length(rf_init)*ceil(tau/4e-6)*4e-6; % 
 rf_init = [rf_init;...                      % reshaping the complex pulse to an array of the real and imag part for the optimization
