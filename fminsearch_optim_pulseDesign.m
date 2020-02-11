@@ -42,16 +42,15 @@ options                = optimset('MaxFunEvals',1e8,'MaxIter',1e8,'TolFun',1e-6,
 pulse                  = fminsearch(@(pulse) fmin_pulse_design_cost(pulse,ideal_profile,Nf,time,N,T1,T2),rf_init,options);
 pulse_tmp              = pulse(1,:) + 1i*pulse(2,:);         % concatenating the real and imag part to a complex waveform
 
-% evaluate the result at a range of B1 amplitudes
-% for the pre-clinical volume coil used 0.5 - 2 range is reasonable
+%% evaluate the result at a range of B1 amplitudes, for the pre-clinical volume coil used 0.5 - 2 range is reasonable
 df    = linspace(-1200,1200,2400);
 B1    = 0.5:0.2:2;
 pulse = B1'*pulse_tmp;
 mx    = zeros(length(B1),length(df));my = zeros(length(B1),length(df));mz = zeros(length(B1),length(df));
 parfor i = 1:length(B1)
-   [mx(i,:),my(i,:),mz(i,:)] = bloch1(pulse(i,:),0,time/Np,T1,T2,df,0,[0 0]);
+   [mx(i,:),my(i,:),mz(i,:)] = bloch1(pulse(i,:),0,TS,T1,T2,df,0,[0 0]);
    while sum(isnan(mx(i,:))+isnan(my(i,:))+isnan(mz(i,:)))>0
-        [mx(i,:),my(i,:),mz(i,:)] = bloch1(pulse(i,:),0,time/Np,T1,T2,df,0,[0 0]);
+        [mx(i,:),my(i,:),mz(i,:)] = bloch1(pulse(i,:),0,TS,T1,T2,df,0,[0 0]);
    end
 end
 
