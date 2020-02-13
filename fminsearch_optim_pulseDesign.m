@@ -26,7 +26,7 @@ T1    = 50;                                 % T1 relaxation time for [1-13C]lac
 T2    = 0.2;                                % T2 relaxation time for [1-13C]lac
 Nf    = 700;                                % number of frequency points where the result is evaluated in the cost fcn
 FA    = 45;                                 % desired flip-angle
-maxB1 = 1.5;                                % maximal B1 amplitude achievable by the coil [G]
+maxB1 = 1.5;                                % maximal B1 amplitude achievable with the coil [G]
 
 target_metab = 'lac'                        % target metabolite: 'pyr' or 'lac'
 
