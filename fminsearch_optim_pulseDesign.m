@@ -26,6 +26,8 @@ T1    = 50;                                 % T1 relaxation time for [1-13C]lac
 T2    = 0.2;                                % T2 relaxation time for [1-13C]lac
 Nf    = 700;                                % number of frequency points where the result is evaluated in the cost fcn
 FA    = 45;                                 % desired flip-angle
+maxB1 = 1.5;                                % maximal B1 amplitude achievable by the coil [G]
+
 target_metab = 'lac'                        % target metabolite: 'pyr' or 'lac'
 
 %% polynomial generation  and iSLR
@@ -49,7 +51,7 @@ end
 ideal_profile                  = zeros(1,Nf);               
 ideal_profile(abs(df)<inhomHz) = sin(FA/180*pi);    % design goal specification
 options                        = optimset('MaxFunEvals',1e8,'MaxIter',1e8,'TolFun',1e-6,'TolX',1e-6);
-pulse                          = fminsearch(@(pulse) fmin_pulse_design_cost(pulse,ideal_profile,Nf,time,N,T1,T2,inhomHz,target_metab),rf_init,options);
+pulse                          = fminsearch(@(pulse) fmin_pulse_design_cost(pulse,ideal_profile,Nf,time,N,T1,T2,df,inhomHz,target_metab,maxB1),rf_init,options);
 pulse_tmp                      = pulse(1,:) + 1i*pulse(2,:);         % concatenating the real and imag part to a complex waveform
 
 %% evaluate the result at a range of B1 amplitudes, for the pre-clinical volume coil used 0.5 - 2 range is reasonable
