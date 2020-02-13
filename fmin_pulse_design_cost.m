@@ -27,7 +27,7 @@ function [ result ] = fmin_pulse_design_cost(pulse,goal,Nf,time,Np,T1,T2)
 
 
 target_metab = 'lac';   % lac of pyr 
-inhomHz     = 100;      % frequency band radius around the target metabolites
+inhomHz     = 70;      % frequency band radius around the target metabolites
 maxB1       = 1.5;      % maximal B1 amplitude achievable by the coil [G]
 offset      = strcmp(target_metab,'pyr')*916;   % offset frequency between lac and pyr
 if strcmp(target_metab,'lac')
