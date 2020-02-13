@@ -8,7 +8,7 @@ function [rf] = iSLR(alpha,beta,gamma,TS)
 %   Input:
 %       alpha = coefficients of the alpha polynomial  
 %       beta  = coefficients of the beta polynomial  
-%       gamma = gyromagnetic ratio [H/T]
+%       gamma = gyromagnetic ratio [Hz/T]
 %       TS    = RF pulse sampling time [s]
 %   Output:
 %       rf    = RF waveform
