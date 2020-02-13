@@ -1,4 +1,4 @@
-function [ result ] = fmin_pulse_design_cost(pulse,goal,Nf,time,Np,T1,T2,df,inhomHz,target_metab)
+function [ result ] = fmin_pulse_design_cost(pulse,goal,Nf,time,Np,T1,T2,df,inhomHz,target_metab,maxB1)
 
 % Cost function for the optimized excitation pulse design used in paper:  
 % 
