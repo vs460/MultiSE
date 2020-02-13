@@ -19,7 +19,6 @@ om_p  = 100;                                % pass-band endge [Hz]
 F     = [0 om_p om_s f]/f;                  % array of relative frequencies for the fir design funtion
 Amp   = [1/sqrt(2) 1/sqrt(2) 0 0];          % array of amplitudes of each freqeuncy region
 W     = [1 1];                              % weight of each frequency region
-BW    = (om_p + om_s)/2/pi*f;               % normalized pass-band width
 gamma = 2*pi*10.71e6;                       % 13C gyromagnetic ratio [H/T]
 TS    = 1/f;                                % sampling time of the pulse [s]
 T1    = 50;                                 % T1 relaxation time for [1-13C]lac
