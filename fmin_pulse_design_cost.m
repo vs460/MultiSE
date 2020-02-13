@@ -1,4 +1,4 @@
-function [ result ] = fmin_pulse_design_cost(pulse,goal,Nf,time,Np,T1,T2)
+function [ result ] = fmin_pulse_design_cost(pulse,goal,Nf,time,Np,T1,T2,df,inhomHz,target_metab)
 
 % Cost function for the optimized excitation pulse design used in paper:  
 % 
@@ -25,18 +25,7 @@ function [ result ] = fmin_pulse_design_cost(pulse,goal,Nf,time,Np,T1,T2)
 % 
 % Vencel Somai 2020. -> vs460@cam.ac.uk 
 
-
-target_metab = 'lac';   % lac of pyr 
-inhomHz     = 70;      % frequency band radius around the target metabolites
-maxB1       = 1.5;      % maximal B1 amplitude achievable by the coil [G]
-offset      = strcmp(target_metab,'pyr')*916;   % offset frequency between lac and pyr
-if strcmp(target_metab,'lac')
-    df      = linspace(-1200,200,Nf);           % freqeuncy range where the profiles are evaluated
-elseif strcmp(target_metab,'pyr')
-    df      = linspace(-200,1200,Nf);           % freqeuncy range where the profiles are evaluated
-else
-    error("Unrecognized metabolite! Use either 'lac' or 'pyr' \n")
-end        
+offset      = strcmp(target_metab,'pyr')*916;   % offset frequency between lac and pyr     
 weights     = ones(size(df));                   % weights indexing where the frequency profile is of interest
 weights_lac = ones(size(df));                   % weights indexing the lactate frequency band
 weights_pyr = ones(size(df));                   % weights indexing the pyruvate frequency band
