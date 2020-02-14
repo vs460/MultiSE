@@ -28,23 +28,28 @@ FA      = 45;                                 % desired flip-angle
 maxB1   = 1.5;                                % maximal B1 amplitude achievable with the coil [G]
 inhomHz = 70;                                 % half BW of the desired offres compensation [Hz]
 
-target_metab = 'lac'                        % target metabolite: 'pyr' or 'lac'
+minPhase     = true;                          % starting with a minimal phase SLR pulse speeds up the optimization         
+target_metab = 'lac'                          % target metabolite: 'pyr' or 'lac'
 
 %% polynomial generation  and iSLR
-beta    = firls(N,F,Amp,W);                 % generating linear phase filter
-alpha   = gen_alpha(beta);                  % generating matching minimum-phase alpha 
-rf      = iSLR(alpha,beta,gamma,TS);        % inverse-SLR transform
-rf      = rf*1e4;                           % converting from T to G for the Bloch-simulator
+beta    = firls(N,F,Amp,W);                   % generating linear phase filter
+if minPhase
+    beta = conv2MinPhase(beta);
+end
+alpha   = gen_alpha(beta);                    % generating matching minimum-phase alpha 
+rf      = iSLR(alpha,beta,gamma,TS);          % inverse-SLR transform
+rf      = rf*1e4;                             % converting from T to G for the Bloch-simulator
 rf_init = -imag(rf);                        
-tau     = time/N;                           % rounding it to the nearest multiple of 4e-6s
+tau     = time/N;                             % rounding it to the nearest multiple of 4e-6s
 time    = length(rf_init)*ceil(tau/4e-6)*4e-6;  
-rf_init = [rf_init;...                      % reshaping the complex pulse to an array of the real and imag part for the optimization
+rf_init = [rf_init;...                        % reshaping the complex pulse to an array of the real and imag part for the optimization
            zeros(1,length(rf_init))];
+           
 %% refine it with optimization
 if strcmp(target_metab,'lac')
-    df      = linspace(-1200,200,Nf);           % freqeuncy range where the profiles are evaluated
+    df      = linspace(-1200,200,Nf);         % freqeuncy range where the profiles are evaluated
 elseif strcmp(target_metab,'pyr')
-    df      = linspace(-200,1200,Nf);           % freqeuncy range where the profiles are evaluated
+    df      = linspace(-200,1200,Nf);         % freqeuncy range where the profiles are evaluated
 else
     error("Unrecognized metabolite! Use either 'lac' or 'pyr' \n")
 end   
