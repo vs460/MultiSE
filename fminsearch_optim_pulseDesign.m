@@ -11,21 +11,22 @@ clear all
 close all
 
 %% set parameters
-N     = 402;                                % number of initial filter points
-time  = 11.256e-3                           % total duration of the pulse [s]
-f     = 1/time*N;                           % physical smapling bandwidth
-om_s  = 300;                                % stop-band endge [Hz]
-om_p  = 100;                                % pass-band endge [Hz]
-F     = [0 om_p om_s f]/f;                  % array of relative frequencies for the fir design funtion
-Amp   = [1/sqrt(2) 1/sqrt(2) 0 0];          % array of amplitudes of each freqeuncy region
-W     = [1 1];                              % weight of each frequency region
-gamma = 10.71e6;                            % 13C gyromagnetic ratio [Hz/T]
-TS    = 1/f;                                % sampling time of the pulse [s]
-T1    = 50;                                 % T1 relaxation time for [1-13C]lac
-T2    = 0.2;                                % T2 relaxation time for [1-13C]lac
-Nf    = 700;                                % number of frequency points where the result is evaluated in the cost fcn
-FA    = 45;                                 % desired flip-angle
-maxB1 = 1.5;                                % maximal B1 amplitude achievable with the coil [G]
+N       = 402;                                % number of initial filter points
+time    = 11.256e-3                           % total duration of the pulse [s]
+f       = 1/time*N;                           % physical smapling bandwidth
+om_s    = 300;                                % stop-band endge [Hz]
+om_p    = 100;                                % pass-band endge [Hz]
+F       = [0 om_p om_s f]/f;                  % array of relative frequencies for the fir design funtion
+Amp     = [1/sqrt(2) 1/sqrt(2) 0 0];          % array of amplitudes of each freqeuncy region
+W       = [1 1];                              % weight of each frequency region
+gamma   = 10.71e6;                            % 13C gyromagnetic ratio [Hz/T]
+TS      = 1/f;                                % sampling time of the pulse [s]
+T1      = 50;                                 % T1 relaxation time for [1-13C]lac
+T2      = 0.2;                                % T2 relaxation time for [1-13C]lac
+Nf      = 700;                                % number of frequency points where the result is evaluated in the cost fcn
+FA      = 45;                                 % desired flip-angle
+maxB1   = 1.5;                                % maximal B1 amplitude achievable with the coil [G]
+inhomHz = 70;                                 % half BW of the desired offres compensation [Hz]
 
 target_metab = 'lac'                        % target metabolite: 'pyr' or 'lac'
 
