@@ -34,7 +34,7 @@ target_metab = 'lac'                          % target metabolite: 'pyr' or 'lac
 %% polynomial generation  and iSLR
 beta    = firls(N,F,Amp,W);                   % generating linear phase filter
 if minPhase
-    beta = conv2MinPhase(beta);
+   beta = conv2MinPhase(beta);
 end
 alpha   = gen_alpha(beta);                    % generating matching minimum-phase alpha 
 rf      = iSLR(alpha,beta,gamma,TS);          % inverse-SLR transform
