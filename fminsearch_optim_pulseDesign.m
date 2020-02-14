@@ -59,7 +59,7 @@ else
     error("Unrecognized metabolite! Use either 'lac' or 'pyr' \n")
 end   
 ideal_profile                  = zeros(1,Nf);               
-ideal_profile(abs(df)<inhomHz) = sin(FA/180*pi);    % design goal specification
+ideal_profile(abs(df)<inhomHz*(1+strcmp(target_metab,'pyr')*2)) = sin(FA/180*pi);    % design goal specification
 options                        = optimset('MaxFunEvals',1e8,'MaxIter',1e8,'TolFun',1e-6,'TolX',1e-6);
 pulse                          = fminsearch(@(pulse) fmin_pulse_design_cost(pulse,ideal_profile,Nf,time,N,T1,T2,df,inhomHz,target_metab,maxB1),rf_init,options);
 pulse_tmp                      = pulse(1,:) + 1i*pulse(2,:);         % concatenating the real and imag part to a complex waveform
