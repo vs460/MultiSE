@@ -21,6 +21,8 @@ RF pulse design:
 
 fminsearch_optim_pulseDesign.m uses a conventional SLR pulse designed by means of the auxiliary functions gen_alpha.m and iSLR.m and fine-tunes it with numerical optimization in the fmin_pulse_design_cost.m function. For evaluating the cost function the Bloch-simulator from http://www-mrsrl.stanford.edu/~brian/blochsim/ is used. Once freely downloaded add it to path and change the gyromagnetic ratio according to the nucleus of interest then compile. 
 
+Alternatively, forward SLR transform can be used to evaluate the cost function. In this case change fmin_pulse_design_cost() to fmin_pulse_design_cost_fwdSLR() in the fminsearch_optim_pulseDesign script after having compiled the fwdSLR mex-file. This excludes relaxation but gives very similar result for 13C as T1 and T2 are usually much longer than the duration of the pulse. 
+
 ******************************************************************************************************************************************
 Due to computational cost this method is not recommended for routine pulse design, rather for specific problems only!!!
 ******************************************************************************************************************************************
