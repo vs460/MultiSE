@@ -27,7 +27,7 @@ v         = [b_zeros_symb];
 x         = sym('x');
 yourpoly  = expand(prod(x-v));                                    % building the final polynomial from the roots
 b_fir_tmp = sym2poly(yourpoly);                                   % convertig back from symbolic 
-b_fir     = b_fir_tmp/max(abs(b_fir_tmp))*max(abs(b_fir));        % normalizing the result
+b_fir     = b_fir_tmp;
 b_zeros   = roots(b_fir);                                         % check the result once again
 zplane(b_fir);
 title('Zero-pole plot of the result to check numerical stability of the root search')
