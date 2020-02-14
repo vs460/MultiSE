@@ -52,7 +52,7 @@ weights = weights_lac + weights_pyr + weights_ala + weights_PH;
 % better if the RF waveform is somewhat smooth.
 pulse_tmp = smooth(pulse(1,:),9)' + 1i*smooth(pulse(2,:),9)';
 
-% evaluate the result at a range of B1 amplitudes
+%% Evaluate the result at a range of B1 amplitudes
 % for the pre-clinical volume coil used 0.5 - 2 range is reasonable
 B1 = 0.5:0.2:2;
     pulse = B1'*pulse_tmp;
