@@ -17,7 +17,7 @@ The second option is based on convex optimizaton and the cvx solver which is eas
 Once added to path the last (10th !!!) argument or the last defaul value in the coneTrajDesign.m function should be changed to 'true'. This believed to give time-optimal result although takes more time to compute.
 
 
-RF pulse design:
+RF pulse design: /***** Updates to come! *****/
 
 fminsearch_optim_pulseDesign.m uses a conventional SLR pulse designed by means of the auxiliary functions gen_alpha.m and iSLR.m and fine-tunes it with numerical optimization in the fmin_pulse_design_cost.m function. For evaluating the cost function the Bloch-simulator from http://www-mrsrl.stanford.edu/~brian/blochsim/ is used. Once freely downloaded add it to path and change the gyromagnetic ratio according to the nucleus of interest then compile. 
 
