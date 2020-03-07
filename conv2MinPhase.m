@@ -28,10 +28,6 @@ x         = sym('x');
 yourpoly  = expand(prod(x-v));                                    % building the final polynomial from the roots
 b_fir_tmp = sym2poly(yourpoly);                                   % convertig back from symbolic 
 b_fir     = b_fir_tmp;
-zplane(b_fir);
-title('Zero-pole plot of the result to check numerical stability of the root search')
-pause()
-close all
 
 %% interpolation back to the original length
 beta      = interp1(b_fir,linspace(1,length(b_fir),N));
