@@ -1,4 +1,4 @@
-function [beta] = conv2MinPhase(beta)
+function [beta] = conv2MinPhase(beta,prec)
 
 % The function converts the linear phase FIR filter to maximal phase for
 % minumal phase RF pulse by flipping the roots located outside the unit
@@ -7,12 +7,13 @@ function [beta] = conv2MinPhase(beta)
 N            = length(beta);                    % original filter length  
 b_fir        = interp1(beta,linspace(1,N,200)); % downsample to speed up the calculations
 %% symbolic evaluation of the roots and zero-plot
-digits(16);                                     % desired precision for the symbolic calculations
+digits(prec);                                     % desired precision for the symbolic calculations
 b_fir_symb   = poly2sym(b_fir);                 % conversion to symbolic polynomial for increased precision
 b_zeros_symb = vpasolve(b_fir_symb);            % solving for the roots
 b_zeros      = double(b_zeros_symb);            % converting back from symbolic to double
 zplane(b_zeros)                                 % zero-pole plot
 title('Zero-pole plot of the original filter')
+disp('If roots are not as expected increase prec(ision)')
 pause()
 close all
 %% flip the pass-band zeros located outside the unit circle
