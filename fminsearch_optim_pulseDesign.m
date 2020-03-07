@@ -27,6 +27,7 @@ T2       = 0.2;                                % T2 relaxation time for [1-13C]l
 Nf       = 700;                                % number of frequency points where the result is evaluated in the cost fcn
 maxB1    = 1.5;                                % maximal B1 amplitude achievable with the coil [G]
 inhomHz  = 70;                                 % half BW of the desired offres compensation [Hz]
+prec     = 16;                                 % bit precision of the polynomial root seach for minimal phase conversion
 
 minPhase     = true;                           % starting with a minimal phase SLR pulse speeds up the optimization         
 target_metab = 'lac'                           % target metabolite: 'pyr' or 'lac'
@@ -38,7 +39,7 @@ rf       = iSLR(alpha,beta,gamma,TS);          % inverse-SLR transform
 rf       = rf*1e4;                             % converting from T to G for the Bloch-simulator
 if minPhase
    intP  = sum(abs(rf));
-   beta  = conv2MinPhase(beta);
+   beta  = conv2MinPhase(beta,prec);
    alpha = gen_alpha(beta);
    rf    = iSLR(alpha,beta,gamma,TS);
    rf    = rf/sum(abs(rf))*intP/2; 
